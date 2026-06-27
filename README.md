@@ -108,7 +108,7 @@ pizza personalizada.
 
 No fim da página estão os blocos "Sobre" e "Contato".
 
-![Seções Sobre e Contato](prints/print_2.png)
+![Seções Sobre e Contato](contatos.png)
 
 ### 2. Cadastro (`cadastro.php`)
 
