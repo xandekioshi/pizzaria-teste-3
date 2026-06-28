@@ -1,6 +1,6 @@
 <?php
 session_start();
-// Esta página só pode ser acessada por quem está logado.
+
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
     exit;
@@ -29,7 +29,7 @@ if (!isset($_SESSION['usuario_id'])) {
   <main class="conteudo-checkout">
     <div class="container checkout__grade">
 
-      <!-- COLUNA: ENDEREÇO (ViaCEP) -->
+      <!-- (ViaCEP) -->
       <section class="checkout__endereco" aria-labelledby="titulo-endereco">
         <h1 id="titulo-endereco" class="titulo-secao">Endereço de entrega</h1>
 
@@ -83,11 +83,11 @@ if (!isset($_SESSION['usuario_id'])) {
         </form>
       </section>
 
-      <!-- COLUNA: RESUMO DO PEDIDO -->
+   
       <section class="checkout__resumo" aria-labelledby="titulo-resumo">
         <h2 id="titulo-resumo" class="titulo-secao">Resumo do pedido</h2>
 
-        <!-- Preenchido pelo JS lendo o carrinho do localStorage -->
+        
         <ul id="resumo-itens-pedido" class="lista-itens-carrinho"></ul>
 
         <div class="checkout__totais">
@@ -105,14 +105,14 @@ if (!isset($_SESSION['usuario_id'])) {
           </div>
         </div>
 
-        <!-- Envia o pedido para o back-end processar e salvar -->
+       
         <form id="form-finalizar-pedido" action="actions/processar_pedido.php" method="POST">
-          <!-- preenchidos pelo JS antes do envio -->
+          
           <input type="hidden" id="carrinho-json" name="carrinho_json" value="">
           <input type="hidden" id="frete-valor-oculto" name="valor_frete" value="0">
           <input type="hidden" id="total-valor-oculto" name="valor_total" value="0">
 
-          <!-- campos do endereço também vão no POST (copiados pelo JS) -->
+         
           <input type="hidden" id="end-cep"         name="cep"         value="">
           <input type="hidden" id="end-rua"         name="rua"         value="">
           <input type="hidden" id="end-numero"      name="numero"      value="">
