@@ -1,14 +1,14 @@
 <?php
 session_start();
 require_once __DIR__ . '/../config/database.php';
+// SECAO FEITA COM AUXILIO DO CLAUDE OPUS 4.8
 
-// Proteção: só admin entra aqui.
 if (!isset($_SESSION['usuario_id']) || empty($_SESSION['is_admin'])) {
     header('Location: ../login.php');
     exit;
 }
 
-// ---- Cartões de resumo (consultas agregadas) ----
+
 $pedidosHoje = $pdo->query(
     "SELECT COUNT(*) FROM pedidos WHERE DATE(data_pedido) = CURRENT_DATE"
 )->fetchColumn();
@@ -38,7 +38,7 @@ $ultimos = $pdo->query(
      LIMIT 5"
 )->fetchAll();
 
-// Rótulo + cor do status (usado também em pedidos.php).
+
 function etiquetaStatus($status) {
     $mapa = [
         'recebido'          => ['Recebido', 'recebido'],
@@ -87,7 +87,7 @@ function etiquetaStatus($status) {
         <span>Olá, <span id="nome-admin-logado"><?php echo htmlspecialchars($_SESSION['usuario_nome']); ?></span></span>
       </header>
 
-      <!-- CARTÕES DE RESUMO -->
+      
       <section class="admin-cartoes" aria-label="Resumo geral">
         <article class="admin-cartao">
           <span class="admin-cartao__rotulo">Pedidos hoje</span>
@@ -107,7 +107,7 @@ function etiquetaStatus($status) {
         </article>
       </section>
 
-      <!-- EXTRA 2: GRÁFICO DE VENDAS -->
+     
       <section class="admin-grafico" aria-labelledby="titulo-grafico">
         <div class="admin-grafico__cabecalho">
           <h2 id="titulo-grafico">Pizzas mais vendidas</h2>
@@ -119,7 +119,7 @@ function etiquetaStatus($status) {
         <canvas id="grafico-vendas" height="120"></canvas>
       </section>
 
-      <!-- ÚLTIMOS PEDIDOS -->
+      
       <section class="admin-tabela-secao">
         <div class="admin-tabela-secao__cabecalho">
           <h2>Últimos pedidos</h2>
