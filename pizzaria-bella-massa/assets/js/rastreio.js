@@ -1,10 +1,6 @@
-/**
- * rastreio.js  (Extra 3)
- * Pergunta ao PHP, de tempos em tempos, qual é o status do pedido e
- * atualiza a linha do tempo sem recarregar a página.
- */
+// GRANDE PARTE DO JAVA FOI REVISADO E COMPLEMENTADO PELO CLAUDE OPUS 4.8
 document.addEventListener('DOMContentLoaded', () => {
-  // O pedido foi concluído: pode limpar o carrinho guardado.
+  
   localStorage.removeItem('carrinho');
 
   const idPedido = document.body.dataset.pedidoId;
@@ -13,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const linhaTempo = document.getElementById('linha-tempo-pedido');
   const textoStatus = document.getElementById('texto-status-atual');
 
-  // Ordem das etapas e o texto de cada status.
+  
   const ordem = ['recebido', 'em_preparo', 'saiu_para_entrega', 'entregue'];
   const textos = {
     recebido: 'Pedido recebido',
@@ -23,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cancelado: 'Cancelado',
   };
 
-  // Pinta a linha do tempo de acordo com o status atual.
+ 
   function atualizarLinhaTempo(statusAtual) {
     linhaTempo.dataset.statusAtual = statusAtual;
     textoStatus.textContent = textos[statusAtual] || statusAtual;
@@ -41,10 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Marca o estado inicial (veio do PHP).
+ 
   atualizarLinhaTempo(linhaTempo.dataset.statusAtual);
 
-  // Consulta o status no servidor.
+
   async function verificarStatus() {
     try {
       const resposta = await fetch(`actions/status_pedido.php?id=${idPedido}`);
@@ -53,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         atualizarLinhaTempo(dados.status);
       }
     } catch (erro) {
-      // Se der erro, simplesmente tenta de novo na próxima vez.
+      
     }
   }
 
