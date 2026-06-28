@@ -2,14 +2,14 @@
 session_start();
 require_once __DIR__ . '/config/database.php';
 
-// Precisa estar logado e ter um id de pedido na URL.
+
 if (!isset($_SESSION['usuario_id'])) {
     header('Location: login.php');
     exit;
 }
 $idPedido = (int)($_GET['id'] ?? 0);
 
-// Busca o pedido. Um cliente só pode ver o próprio pedido (admin pode ver qualquer um).
+
 $sql = "SELECT * FROM pedidos WHERE id = :id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([':id' => $idPedido]);
@@ -19,7 +19,7 @@ if (!$pedido || ($pedido['id_usuario'] != $_SESSION['usuario_id'] && empty($_SES
     exit('Pedido não encontrado.');
 }
 
-// Itens do pedido (com o nome do produto).
+
 $sqlItens = "SELECT i.quantidade, i.preco_unitario, p.nome
              FROM itens_pedido i
              JOIN produtos p ON p.id = i.id_produto
@@ -29,7 +29,7 @@ $stmtItens->execute([':id' => $idPedido]);
 $itens = $stmtItens->fetchAll();
 
 // ---- EXTRA 1: monta o link do WhatsApp com o resumo do pedido ----
-$whatsappRestaurante = '5567900000000'; // <<< troque pelo número do restaurante (55 + DDD + número)
+$whatsappRestaurante = '5567900000000'; 
 $texto  = "Olá! Quero confirmar o pedido #" . str_pad($idPedido, 4, '0', STR_PAD_LEFT) . "%0A";
 foreach ($itens as $it) {
     $texto .= $it['quantidade'] . "x " . $it['nome'] . "%0A";
@@ -39,7 +39,7 @@ $texto .= "Total: R$ " . number_format($pedido['valor_total'], 2, ',', '.') . "%
 $texto .= "Endereço: " . $pedido['rua'] . ", " . $pedido['numero'] . " - " . $pedido['bairro'];
 $linkWhatsapp = "https://wa.me/$whatsappRestaurante?text=$texto";
 
-// Texto amigável de cada status.
+
 $statusTexto = [
     'recebido'           => 'Pedido recebido',
     'em_preparo'         => 'Em preparo',
@@ -73,7 +73,7 @@ $statusTexto = [
         <h1>Pedido recebido com sucesso!</h1>
         <p>Número do pedido: <strong id="numero-pedido">#<?php echo str_pad($idPedido, 4, '0', STR_PAD_LEFT); ?></strong></p>
 
-        <!-- EXTRA 3: linha do tempo do rastreio (atualizada pelo rastreio.js) -->
+        <!-- EXTRA 3: linha do tempo do rastreio -->
         <ol id="linha-tempo-pedido" class="linha-tempo-pedido" data-status-atual="<?php echo $pedido['status']; ?>">
           <li class="etapa" data-status="recebido">
             <span class="etapa__icone" aria-hidden="true">1</span>
@@ -121,7 +121,7 @@ $statusTexto = [
           </div>
         </div>
 
-        <!-- EXTRA 1: botão do WhatsApp (link montado pelo PHP) -->
+        <!-- EXTRA 1: botão do WhatsApp -->
         <a id="link-whatsapp" href="<?php echo $linkWhatsapp; ?>" target="_blank" rel="noopener" class="botao botao--whatsapp">
           Confirmar pedido pelo WhatsApp
         </a>
