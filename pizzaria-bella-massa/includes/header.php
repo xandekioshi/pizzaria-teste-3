@@ -1,14 +1,5 @@
 <?php
-/**
- * includes/header.php
- * -------------------------------------------------------------
- * Menu superior reaproveitado pelas páginas públicas.
- * IMPORTANTE: a página que inclui este arquivo já deve ter chamado
- * session_start() lá no topo, ANTES de qualquer HTML.
- *
- * Aqui só lemos a $_SESSION para decidir o que mostrar no menu.
- * -------------------------------------------------------------
- */
+
 $usuarioLogado = isset($_SESSION['usuario_id']);
 $usuarioNome   = $_SESSION['usuario_nome'] ?? 'Cliente';
 $usuarioAdmin  = !empty($_SESSION['is_admin']);
@@ -40,7 +31,7 @@ $usuarioAdmin  = !empty($_SESSION['is_admin']);
       </ul>
     </nav>
 
-    <!-- Botão que abre/fecha o carrinho lateral -->
+
     <button type="button" id="botao-abrir-carrinho" class="botao-carrinho"
             aria-controls="carrinho-lateral" aria-expanded="false">
       <span class="botao-carrinho__icone" aria-hidden="true">🛒</span>
