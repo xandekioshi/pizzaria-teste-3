@@ -2,20 +2,16 @@
 session_start();
 require_once __DIR__ . '/config/database.php';
 
-// Busca os produtos no banco e separa por tipo.
+
 $pizzas  = $pdo->query("SELECT * FROM produtos WHERE tipo = 'pizza'  ORDER BY id")->fetchAll();
 $bebidas = $pdo->query("SELECT * FROM produtos WHERE tipo = 'bebida' ORDER BY id")->fetchAll();
 
-// Dados do usuário para os "ganchos" do <body> (lidos pelo JS).
+
 $logado = isset($_SESSION['usuario_id']) ? 'true' : 'false';
 $admin  = !empty($_SESSION['is_admin']) ? 'true' : 'false';
 $nome   = $_SESSION['usuario_nome'] ?? '';
 
-/**
- * Pequena função para desenhar um card de produto.
- * Como a tabela "produtos" não guarda imagem, usamos um emoji
- * de acordo com o tipo (pizza ou bebida).
- */
+
 function cardProduto($p) {
     $emoji = $p['tipo'] === 'pizza' ? '🍕' : '🥤';
     $preco = number_format($p['preco'], 2, ',', '.');
@@ -56,7 +52,7 @@ function cardProduto($p) {
 
   <main id="conteudo-principal">
 
-    <!-- HERO -->
+    
     <section class="hero" aria-label="Apresentação">
       <div class="container hero__conteudo">
         <h1 class="hero__titulo">Pizza boa é a que chega quentinha.</h1>
@@ -65,7 +61,7 @@ function cardProduto($p) {
       </div>
     </section>
 
-    <!-- CARDÁPIO -->
+  
     <section id="cardapio" class="cardapio">
       <div class="container">
         <h2 class="titulo-secao">Cardápio</h2>
@@ -75,7 +71,7 @@ function cardProduto($p) {
           <button type="button" class="cardapio__aba" data-categoria="bebidas" role="tab" aria-selected="false">Bebidas</button>
         </div>
 
-        <!-- PIZZAS (vindas do banco) -->
+       
         <div class="categoria-produtos" id="categoria-pizzas" data-categoria="pizzas">
           <h3 class="categoria-produtos__titulo">Pizzas</h3>
           <div class="produtos-grid" id="lista-pizzas">
@@ -83,7 +79,7 @@ function cardProduto($p) {
           </div>
         </div>
 
-        <!-- BEBIDAS (vindas do banco) -->
+        
         <div class="categoria-produtos" id="categoria-bebidas" data-categoria="bebidas" hidden>
           <h3 class="categoria-produtos__titulo">Bebidas</h3>
           <div class="produtos-grid" id="lista-bebidas">
@@ -94,7 +90,7 @@ function cardProduto($p) {
       </div>
     </section>
 
-    <!-- EXTRA 4: GERADOR DE SABOR COM IA -->
+  
     <section id="gerador-ia" class="gerador-ia">
       <div class="container">
         <h2 class="titulo-secao">Crie sua pizza com Inteligência Artificial</h2>
@@ -137,7 +133,7 @@ function cardProduto($p) {
       </form>
     </dialog>
 
-    <!-- SOBRE -->
+    
     <section id="sobre" class="sobre">
       <div class="container">
         <h2 class="titulo-secao">Sobre a Bella Massa</h2>
@@ -145,7 +141,7 @@ function cardProduto($p) {
       </div>
     </section>
 
-    <!-- CONTATO -->
+   
     <section id="contato" class="contato">
       <div class="container">
         <h2 class="titulo-secao">Contato</h2>
@@ -156,7 +152,7 @@ function cardProduto($p) {
 
   </main>
 
-  <!-- CARRINHO LATERAL (controlado 100% pelo JavaScript) -->
+  
   <aside id="carrinho-lateral" class="carrinho-lateral" aria-label="Carrinho de compras" hidden>
     <div class="carrinho-lateral__topo">
       <h2>Seu pedido</h2>
