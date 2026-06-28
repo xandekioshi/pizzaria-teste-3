@@ -1,12 +1,12 @@
 <?php
 session_start();
-// Se já estiver logado, não faz sentido ver o login de novo.
+
 if (isset($_SESSION['usuario_id'])) {
     header('Location: index.php');
     exit;
 }
-$erro = isset($_GET['erro']);          // login.php?erro=1 quando e-mail/senha errados
-$cadastrado = isset($_GET['cadastro']); // login.php?cadastro=ok depois de criar conta
+$erro = isset($_GET['erro']);          
+$cadastrado = isset($_GET['cadastro']); 
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
