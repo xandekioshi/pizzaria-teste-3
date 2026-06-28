@@ -1,9 +1,5 @@
 <?php
-/**
- * actions/cadastro.php
- * Cria um novo usuário (sempre como cliente, is_admin = false),
- * guardando a senha com hash.
- */
+
 session_start();
 require_once __DIR__ . '/../config/database.php';
 
