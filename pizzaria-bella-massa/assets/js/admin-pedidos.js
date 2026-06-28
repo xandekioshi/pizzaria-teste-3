@@ -1,9 +1,4 @@
-/**
- * admin-pedidos.js
- * - Muda o status de um pedido (chama o PHP).
- * - Abre o modal "Ver detalhes" lendo os dados da própria linha.
- * - Filtra a tabela por status.
- */
+// GRANDE PARTE DO JAVA FOI REVISADO E COMPLEMENTADO PELO CLAUDE OPUS 4.8
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('modal-detalhes-pedido');
   const overlay = document.getElementById('overlay-admin');
@@ -12,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return 'R$ ' + parseFloat(valor).toFixed(2).replace('.', ',');
   }
 
-  // ---- Trocar status ----
+
   document.querySelectorAll('.seletor-status-pedido').forEach((select) => {
     select.addEventListener('change', async () => {
       const dados = new URLSearchParams();
@@ -26,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         const json = await resposta.json();
         if (json.ok) {
-          // Atualiza o data-status da linha (usado no filtro).
+          
           select.closest('tr').dataset.status = select.value;
         } else {
           alert('Não foi possível atualizar o status.');
@@ -37,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ---- Ver detalhes ----
+
   document.querySelectorAll('.botao-ver-detalhes-pedido').forEach((botao) => {
     botao.addEventListener('click', () => {
       const linha = botao.closest('tr');
@@ -49,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('detalhe-valor-frete').textContent = formatarReais(linha.dataset.frete);
       document.getElementById('detalhe-valor-total').textContent = formatarReais(linha.dataset.total);
 
-      // Lista de itens (vem em JSON no data-itens).
+      
       const itens = JSON.parse(linha.dataset.itens);
       const lista = document.getElementById('detalhe-lista-itens');
       lista.innerHTML = '';
@@ -70,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('botao-fechar-modal-detalhes').addEventListener('click', () => modal.close());
 
-  // ---- Filtro por status ----
+ 
   document.getElementById('filtro-status').addEventListener('change', (e) => {
     const filtro = e.target.value;
     document.querySelectorAll('#tabela-pedidos tr').forEach((linha) => {
