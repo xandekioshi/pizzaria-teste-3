@@ -4,6 +4,8 @@ Sistema de pedidos de pizzaria feito em **PHP + PostgreSQL**, com visão do
 **cliente** e do **administrador**. Projeto simples, organizado seguindo a
 separação entre front-end (HTML/CSS/JS) e back-end (PHP).
 
+Alunos: Alexandre Kioshi Machado Guenka e Fernanda Medina (3 Semestre matutino TADS)
+
 ## Estrutura de pastas
 
 ```
