@@ -29,7 +29,7 @@ $faturamentoMes = $pdo->query(
        AND status <> 'cancelado'"
 )->fetchColumn();
 
-// ---- Últimos 5 pedidos ----
+
 $ultimos = $pdo->query(
     "SELECT p.id, u.nome AS cliente, p.data_pedido, p.valor_total, p.status
      FROM pedidos p
