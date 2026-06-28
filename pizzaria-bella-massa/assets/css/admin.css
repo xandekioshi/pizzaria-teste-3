@@ -1,7 +1,4 @@
-/* =========================================================
-   admin.css - estilos do painel administrativo
-   ========================================================= */
-
+/* ---------- LEMBRANDO QUE BOA PARTE DO CSS FOI MODELADO COM AJUDA DO CLAUDE OPUS 4.8 ---------- */
 .pagina-admin { background-color: #eef1f4; }
 
 .admin-layout {
@@ -10,7 +7,7 @@
   min-height: 100vh;
 }
 
-/* ---------- Menu lateral ---------- */
+
 .admin-menu {
   background-color: #2c3e50;
   color: #fff;
@@ -35,7 +32,7 @@
   font-weight: bold;
 }
 
-/* ---------- Conteúdo ---------- */
+
 .admin-conteudo { padding: 24px; }
 .admin-cabecalho {
   display: flex;
@@ -45,7 +42,7 @@
 }
 .admin-cabecalho h1 { margin: 0; color: #2c3e50; }
 
-/* ---------- Cartões de resumo ---------- */
+
 .admin-cartoes {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -64,7 +61,7 @@
 .admin-cartao__rotulo { color: #777; font-size: 14px; }
 .admin-cartao__valor { font-size: 24px; font-weight: bold; color: #2c3e50; }
 
-/* ---------- Gráfico ---------- */
+
 .admin-grafico {
   background: #fff;
   padding: 20px;
@@ -81,7 +78,7 @@
 .admin-grafico__cabecalho h2 { margin: 0; color: #2c3e50; }
 .admin-grafico select { padding: 6px; border: 1px solid #ccc; border-radius: 6px; }
 
-/* ---------- Tabelas ---------- */
+
 .admin-tabela-secao {
   background: #fff;
   padding: 20px;
@@ -107,11 +104,11 @@
 .admin-tabela__acoes { display: flex; gap: 6px; }
 .admin-tabela select { padding: 5px; border: 1px solid #ccc; border-radius: 6px; }
 
-/* ---------- Filtros ---------- */
+
 .admin-filtros { margin-bottom: 16px; }
 .admin-filtros select { padding: 6px; border: 1px solid #ccc; border-radius: 6px; }
 
-/* ---------- Etiquetas de status ---------- */
+
 .etiqueta-status {
   display: inline-block;
   padding: 3px 10px;
@@ -125,7 +122,7 @@
 .etiqueta-status--entregue   { background-color: #27ae60; }
 .etiqueta-status--cancelado  { background-color: #e74c3c; }
 
-/* ---------- Responsivo ---------- */
+
 @media (max-width: 720px) {
   .admin-layout { grid-template-columns: 1fr; }
 }
