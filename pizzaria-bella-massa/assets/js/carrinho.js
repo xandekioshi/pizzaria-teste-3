@@ -1,22 +1,18 @@
-/**
- * carrinho.js
- * Controla o carrinho de compras: adicionar, remover, mudar quantidade,
- * calcular total e guardar no localStorage (para a página de checkout ler).
- */
+// GRANDE PARTE DO JAVA FOI REVISADO E COMPLEMENTADO PELO CLAUDE OPUS 4.8 (PRINCIPALMENTE ESSA PARTE DO CARRINHO KKK)
 
 const CHAVE_CARRINHO = 'carrinho';
 
-// Lê o carrinho do localStorage (ou um array vazio).
+
 function lerCarrinho() {
   return JSON.parse(localStorage.getItem(CHAVE_CARRINHO)) || [];
 }
 
-// Salva o carrinho no localStorage.
+
 function salvarCarrinho(carrinho) {
   localStorage.setItem(CHAVE_CARRINHO, JSON.stringify(carrinho));
 }
 
-// Adiciona um produto (ou aumenta a quantidade se já existir).
+
 function adicionarItem(produto) {
   const carrinho = lerCarrinho();
   const existente = carrinho.find((item) => item.id === produto.id);
@@ -32,7 +28,7 @@ function adicionarItem(produto) {
   abrirCarrinho();
 }
 
-// Muda a quantidade de um item; se chegar a 0, remove.
+
 function mudarQuantidade(id, delta) {
   let carrinho = lerCarrinho();
   const item = carrinho.find((i) => i.id === id);
@@ -47,20 +43,20 @@ function mudarQuantidade(id, delta) {
   renderizarCarrinho();
 }
 
-// Remove um item do carrinho.
+
 function removerItem(id) {
   const carrinho = lerCarrinho().filter((i) => i.id !== id);
   salvarCarrinho(carrinho);
   renderizarCarrinho();
 }
 
-// Limpa o carrinho inteiro.
+
 function limparCarrinho() {
   salvarCarrinho([]);
   renderizarCarrinho();
 }
 
-// Desenha o carrinho na tela.
+
 function renderizarCarrinho() {
   const carrinho = lerCarrinho();
   const lista = document.getElementById('lista-itens-carrinho');
@@ -90,10 +86,10 @@ function renderizarCarrinho() {
     lista.appendChild(li);
   });
 
-  // Mostra/esconde a mensagem de carrinho vazio.
+  
   mensagemVazio.style.display = carrinho.length === 0 ? 'block' : 'none';
 
-  // Atualiza contador e totais.
+
   contador.textContent = totalItens;
   document.getElementById('subtotal-carrinho').textContent =
     'R$ ' + subtotal.toFixed(2).replace('.', ',');
@@ -103,7 +99,7 @@ function renderizarCarrinho() {
   total.dataset.total = subtotal.toFixed(2);
 }
 
-// Abre e fecha o carrinho lateral.
+
 function abrirCarrinho() {
   document.getElementById('carrinho-lateral').hidden = false;
   document.getElementById('overlay').hidden = false;
@@ -113,11 +109,11 @@ function fecharCarrinho() {
   document.getElementById('overlay').hidden = true;
 }
 
-// ---------- Liga os eventos quando a página carrega ----------
+
 document.addEventListener('DOMContentLoaded', () => {
   renderizarCarrinho();
 
-  // Botões "Adicionar" dos produtos.
+  
   document.querySelectorAll('.botao-adicionar-carrinho').forEach((botao) => {
     botao.addEventListener('click', () => {
       adicionarItem({
@@ -129,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Cliques dentro da lista do carrinho (delegação de evento).
+  
   document.getElementById('lista-itens-carrinho').addEventListener('click', (e) => {
     const id = parseInt(e.target.dataset.id, 10);
     if (e.target.classList.contains('botao-aumentar-quantidade')) mudarQuantidade(id, 1);
@@ -137,15 +133,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.target.classList.contains('botao-remover-item')) removerItem(id);
   });
 
-  // Abrir/fechar carrinho.
+ 
   document.getElementById('botao-abrir-carrinho').addEventListener('click', abrirCarrinho);
   document.getElementById('botao-fechar-carrinho').addEventListener('click', fecharCarrinho);
   document.getElementById('overlay').addEventListener('click', fecharCarrinho);
 
-  // Limpar carrinho.
+  
   document.getElementById('botao-limpar-carrinho').addEventListener('click', limparCarrinho);
 
-  // Finalizar pedido: precisa estar logado.
+  
   document.getElementById('link-finalizar-pedido').addEventListener('click', (e) => {
     const logado = document.body.dataset.usuarioLogado === 'true';
     if (lerCarrinho().length === 0) {
