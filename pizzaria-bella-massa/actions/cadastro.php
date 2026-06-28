@@ -13,7 +13,7 @@ $email          = trim($_POST['email'] ?? '');
 $senha          = $_POST['senha'] ?? '';
 $confirmarSenha = $_POST['confirmar_senha'] ?? '';
 
-// Validações simples.
+
 if ($nome === '' || $email === '' || strlen($senha) < 6) {
     header('Location: ../cadastro.php?erro=campos');
     exit;
@@ -23,7 +23,7 @@ if ($senha !== $confirmarSenha) {
     exit;
 }
 
-// Verifica se o e-mail já existe.
+
 $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = :email");
 $stmt->execute([':email' => $email]);
 if ($stmt->fetch()) {
@@ -31,7 +31,7 @@ if ($stmt->fetch()) {
     exit;
 }
 
-// Insere o novo usuário com a senha "hasheada".
+
 $hash = password_hash($senha, PASSWORD_DEFAULT);
 $stmt = $pdo->prepare(
     "INSERT INTO usuarios (nome, email, senha, is_admin)
@@ -43,6 +43,6 @@ $stmt->execute([
     ':senha' => $hash,
 ]);
 
-// Tudo certo: manda para o login.
+
 header('Location: ../login.php?cadastro=ok');
 exit;
